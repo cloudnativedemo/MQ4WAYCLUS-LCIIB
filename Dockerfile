@@ -41,9 +41,8 @@ RUN apt-get dist-upgrade -y
 #Install MQ
 
 # The URL to download the MQ installer from in tar.gz format
-ARG MQ_URL=https://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/messaging/mqadv/mqadv_dev905_ubuntu_x86-64.tar.gz
+ARG MQ_URL=http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/messaging/mqadv/mqadv_dev905_ubuntu_x86-64.tar.gz
 #ARG MQ_URL=http://172.23.50.125/mq9/mqadv_dev905_linux_x86-64.tar.gz
-
 # The MQ packages to install
 ARG MQ_PACKAGES="MQSeriesRuntime-*.rpm MQSeriesServer-*.rpm MQSeriesMsg*.rpm MQSeriesJava*.rpm MQSeriesJRE*.rpm MQSeriesGSKit*.rpm MQSeriesWeb*.rpm"
 
