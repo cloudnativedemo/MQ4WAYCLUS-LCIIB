@@ -40,10 +40,8 @@ RUN apt-get dist-upgrade -y
 
 #Install MQ
 
-# The URL to download the MQ installer from in tar.gz format
-ARG MQ_URL=http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/messaging/mqadv/mqadv_dev905_ubuntu_x86-64.tar.gz
+ARG MQ_URL=http://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/messaging/mqadv/mqadv_dev905_linux_x86-64.tar.gz
 #ARG MQ_URL=http://172.23.50.125/mq9/mqadv_dev905_linux_x86-64.tar.gz
-# The MQ packages to install
 ARG MQ_PACKAGES="MQSeriesRuntime-*.rpm MQSeriesServer-*.rpm MQSeriesMsg*.rpm MQSeriesJava*.rpm MQSeriesJRE*.rpm MQSeriesGSKit*.rpm MQSeriesWeb*.rpm"
 
 RUN mkdir -p /tmp/mq \
@@ -67,7 +65,6 @@ RUN mkdir -p /tmp/mq \
 	&& sed -i 's/PASS_MAX_DAYS\t99999/PASS_MAX_DAYS\t90/' /etc/login.defs \
   	&& sed -i 's/PASS_MIN_DAYS\t0/PASS_MIN_DAYS\t1/' /etc/login.defs \
 	&& sed -i 's/password\t\[success=1 default=ignore\]\tpam_unix\.so obscure sha512/password\t[success=1 default=ignore]\tpam_unix.so obscure sha512 minlen=8/' /etc/pam.d/common-password
-
 COPY *.sh /usr/local/bin/
 COPY *.mqsc /etc/mqm/
 COPY admin.json /etc/mqm/
