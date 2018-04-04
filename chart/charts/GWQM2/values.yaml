@@ -27,7 +27,7 @@ dataPVC:
   size: 2Gi
 
 service:
-  name: mq4wayLcIIB
+  name: mq4waylciib
   type: NodePort
 
 resources:
