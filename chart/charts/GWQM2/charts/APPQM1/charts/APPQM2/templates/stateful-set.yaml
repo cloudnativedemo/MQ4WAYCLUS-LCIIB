@@ -12,11 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-{{- if .Capabilities.APIVersions.Has "apps/v1beta2" }}
-apiVersion: apps/v1beta2
-{{- else }}
 apiVersion: apps/v1beta1
-{{- end }}
 kind: StatefulSet
 metadata:
   name: {{ template "fullname" . }}
@@ -26,17 +22,10 @@ metadata:
     release: "{{ .Release.Name }}"
     heritage: "{{ .Release.Service }}"
 spec:
-  selector:
-    matchLabels:
-      app: {{ template "fullname" . }}
   serviceName: {{ .Values.service.name }}
   replicas: 1
-  {{- if and (.Capabilities.KubeVersion.Major | hasPrefix "1") (.Capabilities.KubeVersion.Minor | hasPrefix "7") }}
-  # Set updateStrategy to "RollingUpdate", if we're on Kubernetes 1.7.
-  # It's already the default for apps/v1beta2 (Kubernetes 1.8 onwards)
   updateStrategy:
     type: RollingUpdate
-  {{- end }}
   template:
     metadata:
       labels:
@@ -46,19 +35,6 @@ spec:
         heritage: "{{ .Release.Service }}"
         QM_IDENTIFIER: "{{ .Release.Name }}"
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: beta.kubernetes.io/arch
-                operator: In
-                values:
-                - amd64
-              - key: beta.kubernetes.io/os
-                operator: In
-                values:
-                - linux                
       {{- if .Values.image.pullSecret }}
       imagePullSecrets:
         - name: {{ .Values.image.pullSecret }}
@@ -70,9 +46,16 @@ spec:
           ports:
           - containerPort: 1414
           - containerPort: 9443
+          - containerPort: 4414
+          - containerPort: 7080
+          - containerPort: 7800
           env:
           - name: LICENSE
             value: {{ .Values.license }}
+          - name: NODE_NAME
+            value: {{ .Values.iib.iibnodename }}
+          - name: IIBSERVERNAME
+            value: {{ .Values.iib.iibservername }}
           - name: MQ_QMGR_NAME
             value: {{ .Values.queueManager.name | default .Release.Name | replace "-" "" }}
           #- name: MQ_DISABLE_WEB_CONSOLE
@@ -124,3 +107,4 @@ spec:
         requests:
           storage: {{ .Values.dataPVC.size | quote }}
   {{- end }}
+

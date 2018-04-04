@@ -35,6 +35,6 @@ spec:
         - name: TIMEOUT
           value: "10" 
       command: ["sh"]
-      # Check that port 1414 is listening
-      args: ["-xc", "nc -v -z -w$(TIMEOUT) $(MQ_HOST) 1414"]
+      # Check that port 4414 is listening
+      args: ["-xc", "nc -v -z -w$(TIMEOUT) $(MQ_HOST) 4414"]
   restartPolicy: Never
