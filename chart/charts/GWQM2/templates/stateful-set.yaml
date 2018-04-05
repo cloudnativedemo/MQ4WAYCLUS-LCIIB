@@ -46,6 +46,7 @@ spec:
         heritage: "{{ .Release.Service }}"
         QM_IDENTIFIER: "{{ .Release.Name }}"
     spec:
+      hostname: mq4waylciib-gwqm2
       affinity:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:

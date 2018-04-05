@@ -35,6 +35,7 @@ spec:
         heritage: "{{ .Release.Service }}"
         QM_IDENTIFIER: "{{ .Release.Name }}"
     spec:
+      hostname: mq4waylciib-appqm2
       {{- if .Values.image.pullSecret }}
       imagePullSecrets:
         - name: {{ .Values.image.pullSecret }}
