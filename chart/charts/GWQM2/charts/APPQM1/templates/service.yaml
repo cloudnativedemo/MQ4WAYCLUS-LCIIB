@@ -15,7 +15,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "fullname" . }}
+#@DA  name: {{ template "fullname" . }} gets image/release name - values override
+# name: {{  .Chart.Name }} gets chart name only not the values override
+  name: "{{  .Chart.Name }}-appqm1"
   labels:
     app: {{ template "fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
