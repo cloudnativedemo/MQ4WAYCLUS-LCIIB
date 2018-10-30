@@ -2,9 +2,9 @@ license: "accept"
 
 image:
   # repository is the container repository to use, which must contain IBM MQ Advanced for Developers
-  repository: icpcluster.icp:8500/default/mq905da 
+  repository: mycluster.icp:8500/default/mq905da 
   # tag is the tag to use for the container repository
-  tag: cc36304
+  tag: 1fb3cfc
   # pullSecret is the secret to use when pulling the image from a private registry
   pullSecret:
   # pullPolicy is either IfNotPresent or Always (https://kubernetes.io/docs/concepts/containers/images/)
