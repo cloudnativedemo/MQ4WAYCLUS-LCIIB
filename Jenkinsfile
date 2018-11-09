@@ -5,4 +5,5 @@ microserviceBuilderPipeline {
   image = 'mq905da'
   mvnCommands = '--version'
   chartFolder = 'chart'
+  test = 'false'
 }
