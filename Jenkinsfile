@@ -3,8 +3,9 @@
 @Library('MicroserviceBuilder') _
 microserviceBuilderPipeline {
   image = 'mq905da'
-  mavenImage = 'wwdemo/images:maven-lab'
+  mvnCommands = '--version'
   chartFolder = 'chart'
-  deployBranch = 'master'
-  namespace = 'default'
+  build = 'true'
+  deploy = 'true'
+  test = 'false'
 }
