@@ -60,14 +60,14 @@ spec:
                 operator: In
                 values:
                 - linux                
-      {{- if .Values.image.pullSecret }}
+      {{- if .Values.global.image.pullSecret }}
       imagePullSecrets:
-        - name: {{ .Values.image.pullSecret }}
+        - name: {{ .Values.global.image.pullSecret }}
       {{- end }}
       containers:
         - name: qmgr
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.global.image.repository }}:{{ .Values.global.image.tag }}"
+          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           ports:
           - containerPort: 1414
           - containerPort: 9443
